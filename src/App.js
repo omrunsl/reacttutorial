@@ -1,28 +1,46 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Navbar from './components/Navbar'
-import User from './components/User'
+import Users from './components/Users'
 import './App.css';
 
-
-
-function App() {
-  return (
-    <div className="container">
+class App extends Component {
+  state = {
+    users: [
+      {
+        id : 1,
+        name: "Ömer ÜNSAL",
+        salary: "5000",
+        department : "Bilişim"
+      },
+      {
+        id : 2,
+        name: "Ahmet ÜNSAL",
+        salary: "6000",
+        department : "Muhasebe"
+      },
+      {
+        id : 3,
+        name: "Zeynep ÜNSAL",
+        salary: "7000",
+        department : "Bilişim"
+      }
+    ]
+  }
+  deleteUser = (id) => {
+    this.setState({
+      users : this.state.users.filter(user => id !== user.id)
+    })
+  }
+  render () {
+    return (
+      <div className="container">
       <Navbar />
       <hr/>
-      <User
-      name="Ömer ÜNSAL"
-      salary="1000"
-      department="Bilişim"
-      />
-
-      <User
-      name="Ahmet ÜNSAL"
-      salary="1500"
-      department="Muhasebe"
-      />
+      <Users deleteUser = {this.deleteUser} users = {this.state.users}/>
     </div>
-  );
+    )
+  }
 }
+
 
 export default App;
