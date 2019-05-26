@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import UserConsumer from '../context'
+import axios from 'axios';
 
 class User extends Component {
   state = { 
@@ -13,11 +14,14 @@ class User extends Component {
     })
   }
 
-  onDeleteUser = (dispatch,e) => {
+  onDeleteUser = async (dispatch,e) => {
     const {id} = this.props
+    //delete request
+    await axios.delete(`http://localhost:3004/users/${id}`)
     //consumer dispartch
     dispatch({type: "DELETE_USER",payload:id})
   }
+  
   render() {
     //Destructing
     const {name, department, salary} = this.props
